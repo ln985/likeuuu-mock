@@ -1,20 +1,17 @@
 #!/usr/bin/env python3
 """
-classes2.dex 补丁工具 - PHP 虚拟主机版
+classes2.dex 补丁工具 - 修复 SHA-1 签名版本
 将 DEX 文件中的 https://zq.likeuuu.top/ 替换为你的域名
 
 用法:
   python3 patch_dex.py <classes2.dex> <你的域名URL> [输出文件]
-  
-示例:
-  python3 patch_dex.py classes2.dex https://zq.abc.com/ patched.dex
-  python3 patch_dex.py classes2.dex http://api.abc.com/ patched.dex
 """
 
 import sys
 import os
 import struct
 import zlib
+import hashlib
 
 OLD_URL = b'https://zq.likeuuu.top/'
 
@@ -28,20 +25,8 @@ def patch_dex(input_path, new_base_url, output_path=None):
     
     new_url = new_base_url.encode('utf-8')
     
-    # 原始 URL 长度 23 字节
     if len(new_url) > len(OLD_URL):
         print(f"❌ 新 URL 长度 ({len(new_url)}) 超过原 URL 长度 ({len(OLD_URL)})")
-        print(f"\n📐 长度参考 (≤ 23 字节可用):")
-        examples = [
-            'https://zq.abc.com/',
-            'https://api.abc.cn/',
-            'http://api.abc.com/',
-            'https://x.abcdef.com/',
-        ]
-        for ex in examples:
-            ok = '✓' if len(ex.encode()) <= len(OLD_URL) else '✗'
-            print(f"  {ex:30s} = {len(ex.encode()):2d} bytes {ok}")
-        print(f"\n💡 建议使用短子域名，如 https://zq.你的域名.com/")
         return False
     
     padded_url = new_url.ljust(len(OLD_URL), b'\x00')
@@ -68,9 +53,13 @@ def patch_dex(input_path, new_base_url, output_path=None):
         print(f"❌ 未找到原始 URL")
         return False
     
-    # 重新计算 checksum
-    new_checksum = zlib.adler32(bytes(data[12:])) & 0xFFFFFFFF
-    data[8:12] = struct.pack('<I', new_checksum)
+    # 重新计算 SHA-1 签名 (offset 12, length 20) — 对 data[32:] 计算
+    sha1 = hashlib.sha1(bytes(data[32:])).digest()
+    data[12:32] = sha1
+    
+    # 重新计算 adler32 checksum (offset 8, length 4) — 对 data[12:] 计算
+    checksum = zlib.adler32(bytes(data[12:])) & 0xFFFFFFFF
+    data[8:12] = struct.pack('<I', checksum)
     
     with open(output_path, 'wb') as f:
         f.write(data)
@@ -79,6 +68,8 @@ def patch_dex(input_path, new_base_url, output_path=None):
     print(f"   原始: {OLD_URL.decode()}")
     print(f"   替换: {new_base_url}")
     print(f"   输出: {output_path}")
+    print(f"   SHA-1 签名: 已重新计算")
+    print(f"   Adler32:    已重新计算")
     print(f"\n⚠️  需要重新签名 APK 后才能安装")
     return True
 
