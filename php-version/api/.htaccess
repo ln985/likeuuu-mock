@@ -1,0 +1,15 @@
+RewriteEngine On
+RewriteBase /api/
+
+# 允许所有跨域
+Header set Access-Control-Allow-Origin "*"
+Header set Access-Control-Allow-Methods "GET, POST, DELETE, OPTIONS"
+Header set Access-Control-Allow-Headers "Content-Type"
+
+# 如果文件/目录存在，直接访问
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# 所有请求转发到 index.php
+RewriteRule ^(.*)$ index.php [QSA,L]
