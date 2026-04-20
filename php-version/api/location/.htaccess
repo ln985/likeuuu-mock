@@ -1,0 +1,6 @@
+# 启用目录索引和路径信息
+DirectoryIndex index.php
+Options +FollowSymLinks +MultiViews
+
+# 允许 /api/location/440305 这样的动态路径传递给 index.php
+AcceptPathInfo On

@@ -1,15 +1,32 @@
-RewriteEngine On
-RewriteBase /api/
+# likeuuu Mock Server - 虚拟主机路由配置
+# 大部分虚拟主机默认支持这些配置
 
-# 允许所有跨域
-Header set Access-Control-Allow-Origin "*"
-Header set Access-Control-Allow-Methods "GET, POST, DELETE, OPTIONS"
-Header set Access-Control-Allow-Headers "Content-Type"
+# 启用必要选项
+Options +FollowSymLinks
+Options +MultiViews
 
-# 如果文件/目录存在，直接访问
-RewriteCond %{REQUEST_FILENAME} -f [OR]
-RewriteCond %{REQUEST_FILENAME} -d
-RewriteRule ^ - [L]
+# 默认首页
+DirectoryIndex index.php
 
-# 所有请求转发到 index.php
-RewriteRule ^(.*)$ index.php [QSA,L]
+# 允许传递路径信息给 PHP
+AcceptPathInfo On
+
+# 重写规则
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # 如果请求的是目录且有尾随斜杠，使用 index.php
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^(.*)/$ $1/index.php [L]
+    
+    # 如果文件不存在（无 .php 后缀），尝试加 .php
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME}.php -f
+    RewriteRule ^(.+)$ $1.php [L]
+    
+    # 将动态路径（数字）传递给同级 index.php
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(\d+)/?$ index.php [QSA,L]
+</IfModule>
