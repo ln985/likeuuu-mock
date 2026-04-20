@@ -5,7 +5,7 @@ require_once dirname(__DIR__, 2) . '/inc.php';
 $config = loadJson('config.json');
 if (!$config) {
     $config = [
-        'linkConfig' => ['mainUrl' => 'https://zq.likeuuu.top/'],
+        'linkConfig' => ['mainUrl' => 'http://dl.wzydqq.icu/'],
         'appLinkConfig' => ['communityGroup' => 'https://qm.qq.com/cgi-bin/qm/qr?k=example123456']
     ];
     saveJson('config.json', $config);

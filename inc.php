@@ -14,7 +14,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 function getDataDir() {
-    // inc.php 在项目根目录，data/ 也在根目录
     $dir = __DIR__ . '/data';
     if (!is_dir($dir)) @mkdir($dir, 0755, true);
     return $dir;
@@ -78,51 +77,51 @@ function getDefaultAnnouncements() {
 
 function getDefaultRegions() {
     return [
-        ['adcode' => '110000', 'name' => '北京市', 'children' => [
-            ['adcode' => '110100', 'name' => '北京市', 'children' => [
-                ['adcode' => '110101', 'name' => '东城区', 'children' => []],
-                ['adcode' => '110102', 'name' => '西城区', 'children' => []],
-                ['adcode' => '110105', 'name' => '朝阳区', 'children' => []],
-                ['adcode' => '110106', 'name' => '丰台区', 'children' => []],
-                ['adcode' => '110108', 'name' => '海淀区', 'children' => []],
+        ['adcode' => '110000', 'name' => '北京市', 'lat' => 39.9042, 'lng' => 116.4074, 'children' => [
+            ['adcode' => '110100', 'name' => '北京市', 'lat' => 39.9042, 'lng' => 116.4074, 'children' => [
+                ['adcode' => '110101', 'name' => '东城区', 'lat' => 39.9284, 'lng' => 116.4164, 'children' => []],
+                ['adcode' => '110102', 'name' => '西城区', 'lat' => 39.9121, 'lng' => 116.3662, 'children' => []],
+                ['adcode' => '110105', 'name' => '朝阳区', 'lat' => 39.9219, 'lng' => 116.4435, 'children' => []],
+                ['adcode' => '110106', 'name' => '丰台区', 'lat' => 39.8586, 'lng' => 116.2868, 'children' => []],
+                ['adcode' => '110108', 'name' => '海淀区', 'lat' => 39.9593, 'lng' => 116.2982, 'children' => []],
             ]]
         ]],
-        ['adcode' => '440000', 'name' => '广东省', 'children' => [
-            ['adcode' => '440300', 'name' => '深圳市', 'children' => [
-                ['adcode' => '440303', 'name' => '罗湖区', 'children' => []],
-                ['adcode' => '440304', 'name' => '福田区', 'children' => []],
-                ['adcode' => '440305', 'name' => '南山区', 'children' => []],
-                ['adcode' => '440306', 'name' => '宝安区', 'children' => []],
-                ['adcode' => '440307', 'name' => '龙岗区', 'children' => []],
+        ['adcode' => '440000', 'name' => '广东省', 'lat' => 23.1291, 'lng' => 113.2644, 'children' => [
+            ['adcode' => '440300', 'name' => '深圳市', 'lat' => 22.5431, 'lng' => 114.0579, 'children' => [
+                ['adcode' => '440303', 'name' => '罗湖区', 'lat' => 22.5485, 'lng' => 114.1315, 'children' => []],
+                ['adcode' => '440304', 'name' => '福田区', 'lat' => 22.5222, 'lng' => 114.0545, 'children' => []],
+                ['adcode' => '440305', 'name' => '南山区', 'lat' => 22.5312, 'lng' => 113.9294, 'children' => []],
+                ['adcode' => '440306', 'name' => '宝安区', 'lat' => 22.5550, 'lng' => 113.8831, 'children' => []],
+                ['adcode' => '440307', 'name' => '龙岗区', 'lat' => 22.7215, 'lng' => 114.2468, 'children' => []],
             ]],
-            ['adcode' => '440100', 'name' => '广州市', 'children' => [
-                ['adcode' => '440103', 'name' => '荔湾区', 'children' => []],
-                ['adcode' => '440104', 'name' => '越秀区', 'children' => []],
-                ['adcode' => '440105', 'name' => '海珠区', 'children' => []],
-                ['adcode' => '440106', 'name' => '天河区', 'children' => []],
+            ['adcode' => '440100', 'name' => '广州市', 'lat' => 23.1291, 'lng' => 113.2644, 'children' => [
+                ['adcode' => '440103', 'name' => '荔湾区', 'lat' => 23.1258, 'lng' => 113.2442, 'children' => []],
+                ['adcode' => '440104', 'name' => '越秀区', 'lat' => 23.1290, 'lng' => 113.2668, 'children' => []],
+                ['adcode' => '440105', 'name' => '海珠区', 'lat' => 23.0842, 'lng' => 113.2620, 'children' => []],
+                ['adcode' => '440106', 'name' => '天河区', 'lat' => 23.1246, 'lng' => 113.3615, 'children' => []],
             ]]
         ]],
-        ['adcode' => '310000', 'name' => '上海市', 'children' => [
-            ['adcode' => '310100', 'name' => '上海市', 'children' => [
-                ['adcode' => '310101', 'name' => '黄浦区', 'children' => []],
-                ['adcode' => '310104', 'name' => '徐汇区', 'children' => []],
-                ['adcode' => '310105', 'name' => '长宁区', 'children' => []],
-                ['adcode' => '310106', 'name' => '静安区', 'children' => []],
+        ['adcode' => '310000', 'name' => '上海市', 'lat' => 31.2304, 'lng' => 121.4737, 'children' => [
+            ['adcode' => '310100', 'name' => '上海市', 'lat' => 31.2304, 'lng' => 121.4737, 'children' => [
+                ['adcode' => '310101', 'name' => '黄浦区', 'lat' => 31.2311, 'lng' => 121.4848, 'children' => []],
+                ['adcode' => '310104', 'name' => '徐汇区', 'lat' => 31.1883, 'lng' => 121.4368, 'children' => []],
+                ['adcode' => '310105', 'name' => '长宁区', 'lat' => 31.2204, 'lng' => 121.4241, 'children' => []],
+                ['adcode' => '310106', 'name' => '静安区', 'lat' => 31.2286, 'lng' => 121.4484, 'children' => []],
             ]]
         ]],
-        ['adcode' => '510000', 'name' => '四川省', 'children' => [
-            ['adcode' => '510100', 'name' => '成都市', 'children' => [
-                ['adcode' => '510104', 'name' => '锦江区', 'children' => []],
-                ['adcode' => '510105', 'name' => '青羊区', 'children' => []],
-                ['adcode' => '510106', 'name' => '金牛区', 'children' => []],
-                ['adcode' => '510107', 'name' => '武侯区', 'children' => []],
+        ['adcode' => '510000', 'name' => '四川省', 'lat' => 30.5728, 'lng' => 104.0668, 'children' => [
+            ['adcode' => '510100', 'name' => '成都市', 'lat' => 30.5728, 'lng' => 104.0668, 'children' => [
+                ['adcode' => '510104', 'name' => '锦江区', 'lat' => 30.6570, 'lng' => 104.0832, 'children' => []],
+                ['adcode' => '510105', 'name' => '青羊区', 'lat' => 30.6742, 'lng' => 104.0619, 'children' => []],
+                ['adcode' => '510106', 'name' => '金牛区', 'lat' => 30.6912, 'lng' => 104.0526, 'children' => []],
+                ['adcode' => '510107', 'name' => '武侯区', 'lat' => 30.6418, 'lng' => 104.0436, 'children' => []],
             ]]
         ]],
-        ['adcode' => '330000', 'name' => '浙江省', 'children' => [
-            ['adcode' => '330100', 'name' => '杭州市', 'children' => [
-                ['adcode' => '330102', 'name' => '上城区', 'children' => []],
-                ['adcode' => '330106', 'name' => '西湖区', 'children' => []],
-                ['adcode' => '330109', 'name' => '萧山区', 'children' => []],
+        ['adcode' => '330000', 'name' => '浙江省', 'lat' => 30.2741, 'lng' => 120.1551, 'children' => [
+            ['adcode' => '330100', 'name' => '杭州市', 'lat' => 30.2741, 'lng' => 120.1551, 'children' => [
+                ['adcode' => '330102', 'name' => '上城区', 'lat' => 30.2434, 'lng' => 120.1695, 'children' => []],
+                ['adcode' => '330106', 'name' => '西湖区', 'lat' => 30.2594, 'lng' => 120.1304, 'children' => []],
+                ['adcode' => '330109', 'name' => '萧山区', 'lat' => 30.1848, 'lng' => 120.2645, 'children' => []],
             ]]
         ]],
     ];
