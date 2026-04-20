@@ -2,7 +2,7 @@
 // GET /api/location          → 省份列表
 // GET /api/location?adcode=X → 行政区划详情
 // GET /api/location/X        → 行政区划详情 (通过 .htaccess 重写)
-require_once dirname(__DIR__, 3) . '/inc.php';
+require_once dirname(__DIR__, 2) . '/inc.php';
 
 // 尝试从 PATH_INFO 或 URI 获取 adcode
 $adcode = $_GET['adcode'] ?? null;

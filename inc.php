@@ -14,8 +14,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 function getDataDir() {
-    // 从任意子目录向上找到 data 目录
-    $dir = dirname(__DIR__, 2) . '/data';
+    // inc.php 在项目根目录，data/ 也在根目录
+    $dir = __DIR__ . '/data';
     if (!is_dir($dir)) @mkdir($dir, 0755, true);
     return $dir;
 }

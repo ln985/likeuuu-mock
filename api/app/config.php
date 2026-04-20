@@ -1,6 +1,6 @@
 <?php
 // GET /api/app/config
-require_once dirname(__DIR__, 3) . '/inc.php';
+require_once dirname(__DIR__, 2) . '/inc.php';
 
 $config = loadJson('config.json');
 if (!$config) {
